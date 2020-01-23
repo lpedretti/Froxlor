@@ -168,7 +168,7 @@ class Apache extends HttpConfigBase
 				$without_vhost = $this->virtualhosts_data[$vhosts_filename];
 				$close_vhost = true;
 
-				$this->virtualhosts_data[$vhosts_filename] .= '<VirtualHost ' . $ipport . '>' . "\n";
+				$this->virtualhosts_data[$vhosts_filename] .= '<VirtualHost ' . $row_ipsandports['port'] . '>' . "\n";
 
 				$mypath = $this->getMyPath($row_ipsandports);
 
@@ -907,7 +907,8 @@ class Apache extends HttpConfigBase
 			if (filter_var($domain['ip'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
 				$ipport = '[' . $domain['ip'] . ']:' . $domain['port'] . ' ';
 			} else {
-				$ipport = $domain['ip'] . ':' . $domain['port'] . ' ';
+				//$ipport = $domain['ip'] . ':' . $domain['port'] . ' ';
+				$ipport = '*:' . $domain['port'] . ' ';
 			}
 
 			if ($ipandport['default_vhostconf_domain'] != '' && ($ssl_vhost == false || ($ssl_vhost == true && $ipandport['include_default_vhostconf_domain'] == '1'))) {
